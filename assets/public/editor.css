@@ -1,0 +1,92 @@
+/**
+ * Sitecraft Accessibility - block editor sidebar styling.
+ *
+ * Scoped entirely to the sidebar's own class names so nothing here can reach the
+ * editor canvas and change how the post being written appears.
+ */
+
+.sc-a11y-editor-status {
+	display: flex;
+	align-items: center;
+	gap: 0.4rem;
+	margin: 0 0 0.75rem;
+	font-weight: 600;
+}
+
+.sc-a11y-editor-caveat {
+	margin: 0.75rem 0 0;
+	color: #50575e;
+	font-size: 12px;
+}
+
+.sc-a11y-editor-list {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+}
+
+.sc-a11y-editor-issue {
+	margin: 0 0 0.75rem;
+	padding: 0.75rem;
+	border: 1px solid #dcdcde;
+	border-radius: 4px;
+	background: #fff;
+}
+
+.sc-a11y-editor-issue__title {
+	margin: 0 0 0.35rem;
+	font-weight: 600;
+}
+
+.sc-a11y-editor-issue__meta {
+	margin: 0 0 0.5rem;
+	color: #50575e;
+	font-size: 12px;
+}
+
+.sc-a11y-editor-issue__context {
+	display: block;
+	overflow-x: auto;
+	margin: 0 0 0.5rem;
+	padding: 0.4rem 0.5rem;
+	border-radius: 3px;
+	background: #f0f0f1;
+	font-size: 11px;
+	white-space: pre;
+}
+
+.sc-a11y-editor-issue__fix {
+	margin: 0;
+	font-size: 12px;
+	line-height: 1.5;
+}
+
+.sc-a11y-editor-badge {
+	display: inline-block;
+	padding: 0.1rem 0.45rem;
+	border-radius: 999px;
+	color: #fff;
+	font-size: 11px;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 0.02em;
+	vertical-align: middle;
+}
+
+/* Severity is carried by the label text as well as the colour: colour alone is
+   not an acceptable way to convey meaning, in our own UI least of all. */
+.sc-a11y-editor-badge--critical {
+	background: #8a1f11;
+}
+
+.sc-a11y-editor-badge--serious {
+	background: #b32d0f;
+}
+
+.sc-a11y-editor-badge--moderate {
+	background: #8a6116;
+}
+
+.sc-a11y-editor-badge--minor {
+	background: #4a5561;
+}

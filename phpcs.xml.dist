@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<ruleset name="Sitecraft Accessibility">
+
+	<description>WordPress Coding Standards for Sitecraft Accessibility (PHP 8.1+, WordPress 6.5+).</description>
+
+	<file>.</file>
+
+	<exclude-pattern>*/vendor/*</exclude-pattern>
+	<exclude-pattern>*/node_modules/*</exclude-pattern>
+	<exclude-pattern>*/languages/*</exclude-pattern>
+
+	<arg name="basepath" value="."/>
+	<arg name="extensions" value="php"/>
+	<arg name="parallel" value="8"/>
+	<arg name="colors"/>
+	<arg value="sp"/>
+
+	<!-- Drives the deprecation and feature-availability sniffs. -->
+	<config name="minimum_wp_version" value="6.5"/>
+
+	<rule ref="WordPress">
+		<!-- Class files are PSR-4 mapped by the bundled autoloader, so they are named
+		     PascalCase.php rather than class-name.php. -->
+		<exclude name="WordPress.Files.FileName.InvalidClassFileName"/>
+		<exclude name="WordPress.Files.FileName.NotHyphenatedLowercase"/>
+	</rule>
+
+	<rule ref="WordPress.WP.I18n">
+		<properties>
+			<property name="text_domain" type="array">
+				<element value="sitecraft-accessibility"/>
+			</property>
+		</properties>
+	</rule>
+
+	<rule ref="WordPress.NamingConventions.PrefixAllGlobals">
+		<properties>
+			<property name="prefixes" type="array">
+				<element value="sitecraft_a11y"/>
+				<element value="SITECRAFT_A11Y"/>
+				<element value="Sitecraft\Accessibility"/>
+			</property>
+		</properties>
+	</rule>
+
+</ruleset>

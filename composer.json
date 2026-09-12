@@ -1,0 +1,41 @@
+{
+	"name": "sitecraft/sitecraft-accessibility",
+	"description": "Audits WordPress content against WCAG 2.1 AA and WCAG 2.2, remediates markup server-side and generates an accessibility statement. Not an overlay.",
+	"type": "wordpress-plugin",
+	"license": "GPL-2.0-or-later",
+	"keywords": [
+		"wordpress",
+		"accessibility",
+		"wcag",
+		"a11y",
+		"audit"
+	],
+	"homepage": "https://github.com/sitecraft-suite/sitecraft-accessibility",
+	"support": {
+		"issues": "https://github.com/sitecraft-suite/sitecraft-accessibility/issues",
+		"source": "https://github.com/sitecraft-suite/sitecraft-accessibility"
+	},
+	"require": {
+		"php": ">=8.1"
+	},
+	"require-dev": {
+		"squizlabs/php_codesniffer": "^3.9",
+		"wp-coding-standards/wpcs": "^3.1"
+	},
+	"config": {
+		"allow-plugins": {
+			"dealerdirect/phpcodesniffer-composer-installer": true
+		},
+		"sort-packages": true
+	},
+	"scripts": {
+		"lint": "find . -name '*.php' -not -path './vendor/*' -print0 | xargs -0 -n1 -P4 php -l",
+		"phpcs": "phpcs",
+		"phpcbf": "phpcbf"
+	},
+	"scripts-descriptions": {
+		"lint": "Runs php -l over every PHP file outside vendor/.",
+		"phpcs": "Checks the plugin against the WordPress Coding Standards.",
+		"phpcbf": "Applies the WordPress Coding Standards fixes that can be automated."
+	}
+}

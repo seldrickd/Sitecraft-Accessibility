@@ -1,0 +1,392 @@
+/**
+ * Sitecraft shared admin design language.
+ *
+ * Loaded by every plugin in the suite so the screens read as one product. Colours
+ * are declared as custom properties on a single scope, which keeps the palette in
+ * one place and lets the dark scheme override tokens rather than rules.
+ */
+
+.sc-wrap {
+	--sc-bg: #ffffff;
+	--sc-bg-subtle: #f6f7f9;
+	--sc-border: #dcdfe4;
+	--sc-border-strong: #c3c8d0;
+	--sc-text: #1e1f24;
+	--sc-text-muted: #5b6270;
+	--sc-accent: #2b5cE0;
+	--sc-accent-contrast: #ffffff;
+	--sc-success: #1a7f4b;
+	--sc-warning: #9a6700;
+	--sc-danger: #b32d2e;
+	--sc-radius: 8px;
+	--sc-gap: 16px;
+	--sc-shadow: 0 1px 2px rgba( 16, 24, 40, 0.06 ), 0 1px 3px rgba( 16, 24, 40, 0.1 );
+
+	max-width: 1180px;
+	color: var( --sc-text );
+}
+
+@media ( prefers-color-scheme: dark ) {
+	.sc-wrap {
+		--sc-bg: #1d2125;
+		--sc-bg-subtle: #22272b;
+		--sc-border: #3c4348;
+		--sc-border-strong: #4d555b;
+		--sc-text: #e6e8ea;
+		--sc-text-muted: #9fa6ad;
+		--sc-accent: #7aa2f7;
+		--sc-accent-contrast: #10131a;
+		--sc-success: #4ec98a;
+		--sc-warning: #e2b53d;
+		--sc-danger: #f2777a;
+		--sc-shadow: none;
+	}
+}
+
+/* ---------------------------------------------------------------- Header --- */
+
+.sc-title {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	margin-bottom: 4px;
+	font-size: 23px;
+	font-weight: 600;
+}
+
+.sc-subtitle {
+	margin: 0 0 var( --sc-gap );
+	color: var( --sc-text-muted );
+	font-size: 13px;
+}
+
+/* ----------------------------------------------------------------- Tabs ---- */
+
+.sc-tabs {
+	margin-bottom: var( --sc-gap );
+}
+
+/* Focus must be visible for keyboard users; WordPress core relies on the browser
+   default here, which several admin themes suppress. */
+.sc-wrap a:focus-visible,
+.sc-wrap button:focus-visible,
+.sc-wrap input:focus-visible,
+.sc-wrap select:focus-visible,
+.sc-wrap textarea:focus-visible {
+	outline: 2px solid var( --sc-accent );
+	outline-offset: 2px;
+	box-shadow: none;
+}
+
+/* ---------------------------------------------------------------- Panel ---- */
+
+.sc-panel {
+	padding: 20px 24px;
+	border: 1px solid var( --sc-border );
+	border-radius: var( --sc-radius );
+	background: var( --sc-bg );
+	box-shadow: var( --sc-shadow );
+}
+
+.sc-section-description {
+	margin: 0 0 12px;
+	max-width: 70ch;
+	color: var( --sc-text-muted );
+}
+
+/* ---------------------------------------------------------------- Cards ---- */
+
+.sc-cards {
+	display: grid;
+	grid-template-columns: repeat( auto-fit, minmax( 220px, 1fr ) );
+	gap: var( --sc-gap );
+	margin-bottom: var( --sc-gap );
+}
+
+.sc-card {
+	padding: 16px 18px;
+	border: 1px solid var( --sc-border );
+	border-radius: var( --sc-radius );
+	background: var( --sc-bg-subtle );
+}
+
+.sc-card-label {
+	display: block;
+	margin-bottom: 6px;
+	color: var( --sc-text-muted );
+	font-size: 12px;
+	font-weight: 600;
+	letter-spacing: 0.04em;
+	text-transform: uppercase;
+}
+
+.sc-card-value {
+	display: block;
+	font-size: 28px;
+	font-weight: 600;
+	line-height: 1.1;
+	font-variant-numeric: tabular-nums;
+}
+
+.sc-card-meta {
+	display: block;
+	margin-top: 4px;
+	color: var( --sc-text-muted );
+	font-size: 12px;
+}
+
+.sc-card--good .sc-card-value {
+	color: var( --sc-success );
+}
+
+.sc-card--warn .sc-card-value {
+	color: var( --sc-warning );
+}
+
+.sc-card--bad .sc-card-value {
+	color: var( --sc-danger );
+}
+
+/* --------------------------------------------------------------- Toggle ---- */
+
+.sc-toggle {
+	display: inline-flex;
+	align-items: center;
+	gap: 10px;
+	cursor: pointer;
+}
+
+/* The native checkbox stays in the accessibility tree and keeps its own focus
+   ring; only its painting is replaced. Never use display:none here. */
+.sc-toggle input[type="checkbox"] {
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	padding: 0;
+	overflow: hidden;
+	clip: rect( 0 0 0 0 );
+	clip-path: inset( 50% );
+	white-space: nowrap;
+	border: 0;
+}
+
+.sc-toggle-track {
+	position: relative;
+	display: inline-block;
+	width: 40px;
+	height: 22px;
+	border-radius: 999px;
+	background: var( --sc-border-strong );
+	transition: background 0.15s ease-in-out;
+}
+
+.sc-toggle-track::after {
+	content: "";
+	position: absolute;
+	top: 3px;
+	left: 3px;
+	width: 16px;
+	height: 16px;
+	border-radius: 50%;
+	background: #fff;
+	transition: transform 0.15s ease-in-out;
+}
+
+.sc-toggle input:checked + .sc-toggle-track {
+	background: var( --sc-accent );
+}
+
+.sc-toggle input:checked + .sc-toggle-track::after {
+	transform: translateX( 18px );
+}
+
+.sc-toggle input:focus-visible + .sc-toggle-track {
+	outline: 2px solid var( --sc-accent );
+	outline-offset: 2px;
+}
+
+.sc-toggle-text {
+	color: var( --sc-text-muted );
+	font-size: 13px;
+}
+
+@media ( prefers-reduced-motion: reduce ) {
+	.sc-toggle-track,
+	.sc-toggle-track::after {
+		transition: none;
+	}
+}
+
+/* -------------------------------------------------------- Choice groups ---- */
+
+.sc-choice-group {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+}
+
+.sc-choice {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+}
+
+/* --------------------------------------------------------------- Badges ---- */
+
+.sc-badge {
+	display: inline-block;
+	padding: 2px 8px;
+	border-radius: 999px;
+	font-size: 11px;
+	font-weight: 600;
+	line-height: 1.7;
+	letter-spacing: 0.02em;
+	text-transform: uppercase;
+}
+
+.sc-badge--critical {
+	background: rgba( 179, 45, 46, 0.12 );
+	color: var( --sc-danger );
+}
+
+.sc-badge--serious {
+	background: rgba( 154, 103, 0, 0.14 );
+	color: var( --sc-warning );
+}
+
+.sc-badge--moderate {
+	background: rgba( 43, 92, 224, 0.12 );
+	color: var( --sc-accent );
+}
+
+.sc-badge--minor,
+.sc-badge--info {
+	background: rgba( 91, 98, 112, 0.14 );
+	color: var( --sc-text-muted );
+}
+
+.sc-badge--pass,
+.sc-badge--success {
+	background: rgba( 26, 127, 75, 0.12 );
+	color: var( --sc-success );
+}
+
+/* --------------------------------------------------------------- Tables ---- */
+
+.sc-table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.sc-table th,
+.sc-table td {
+	padding: 10px 12px;
+	border-bottom: 1px solid var( --sc-border );
+	text-align: left;
+	vertical-align: top;
+}
+
+.sc-table th {
+	font-weight: 600;
+}
+
+.sc-table tbody tr:hover {
+	background: var( --sc-bg-subtle );
+}
+
+.sc-table-scroll {
+	overflow-x: auto;
+}
+
+.sc-code {
+	display: block;
+	max-width: 60ch;
+	overflow-x: auto;
+	padding: 6px 8px;
+	border-radius: 4px;
+	background: var( --sc-bg-subtle );
+	font-family: Consolas, Monaco, monospace;
+	font-size: 12px;
+	white-space: pre-wrap;
+	word-break: break-word;
+}
+
+/* Inline variant for a rule id or selector sitting beside other text. The block
+   variant above is for multi-line markup snippets and would push a neighbouring
+   badge onto its own line. */
+.sc-code--inline {
+	display: inline;
+	max-width: none;
+	padding: 2px 6px;
+}
+
+/* The findings table puts each markup snippet inside a native disclosure: it is
+   keyboard operable, announced as expandable, and needs no JavaScript, which is
+   the standard this plugin has to hold itself to. */
+.sc-details summary {
+	cursor: pointer;
+	color: var( --sc-accent );
+}
+
+.sc-details summary:focus-visible {
+	outline: 2px solid var( --sc-border-strong );
+	outline-offset: 2px;
+}
+
+.sc-details[open] summary {
+	margin-bottom: 6px;
+}
+
+.sc-details .sc-code {
+	max-width: 48ch;
+}
+
+/* ---------------------------------------------------------------- Misc ----- */
+
+.sc-actions {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	align-items: center;
+	margin: var( --sc-gap ) 0;
+}
+
+.sc-empty {
+	padding: 32px;
+	border: 1px dashed var( --sc-border-strong );
+	border-radius: var( --sc-radius );
+	color: var( --sc-text-muted );
+	text-align: center;
+}
+
+.sc-progress {
+	overflow: hidden;
+	height: 8px;
+	border-radius: 999px;
+	background: var( --sc-bg-subtle );
+}
+
+.sc-progress-bar {
+	height: 100%;
+	background: var( --sc-accent );
+	transition: width 0.2s ease-in-out;
+}
+
+/* Screen reader only helper, matching core's .screen-reader-text contract. */
+.sc-sr-only {
+	position: absolute !important;
+	width: 1px;
+	height: 1px;
+	margin: -1px;
+	padding: 0;
+	overflow: hidden;
+	clip: rect( 0 0 0 0 );
+	clip-path: inset( 50% );
+	white-space: nowrap;
+	border: 0;
+}
+
+.sc-field-row[hidden] {
+	display: none;
+}
